@@ -1,11 +1,9 @@
-# Ignorar todo
-/*
-
-# No ignorar el directorio src
-!/src/
-
-# No ignorar el archivo .gitignore
-!/.gitignore
+/build/
+/dist/
+/nbproject/
+/test/
+/build.xml
+/manifest.mf
 
 ############################################
 

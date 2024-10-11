@@ -39,7 +39,7 @@ public class Estat1 extends Estat {
 
     @Override
     public void onScannedRobot(ScannedRobotEvent event) {
-        /*if (event.getDistance() <= SAFE_DISTANCE) {
+        if (event.getDistance() <= SAFE_DISTANCE) {
             robot.fire(1); 
             robot.turnRight(90);
             
@@ -53,13 +53,12 @@ public class Estat1 extends Estat {
         robot.turnRight(normalizeAngle(targetAngle - robot.getHeading()));
         robot.turnRadarRight(normalizeAngle(targetAngle - robot.getRadarHeading()));
 
-        }*/
-                robot.back(50);
-
+        }
     }
     
     @Override
     public void onHitRobot(HitRobotEvent event) {
+        robot.back(50);
     }
 
 

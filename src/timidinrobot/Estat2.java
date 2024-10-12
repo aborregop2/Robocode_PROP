@@ -1,6 +1,7 @@
 package timidinrobot;
 
 import robocode.HitRobotEvent;
+import robocode.HitWallEvent;
 import robocode.ScannedRobotEvent;
 
 
@@ -40,6 +41,8 @@ public class Estat2 extends Estat{
     }
      
     @Override
-    public void onHitRobot(HitRobotEvent event) {
-    }
+    public void onHitRobot(HitRobotEvent event) {}
+    
+    @Override
+    public void onHitWall(HitWallEvent event) {}
 }

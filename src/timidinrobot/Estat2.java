@@ -9,6 +9,7 @@ import robocode.ScannedRobotEvent;
 public class Estat2 extends Estat{
     
     private final double RADAR_TURN_ANGLE = 5;
+   
 
     public Estat2(TimidinRobot rob) {
         super(rob);

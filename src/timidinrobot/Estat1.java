@@ -34,6 +34,9 @@ public class Estat1 extends Estat {
             
             robot.ahead(Math.hypot(deltaX, deltaY) - 60);
             
+            if (Math.hypot(deltaX, deltaY) <= 60){
+                robot.e = new Estat2(robot);
+            }
             
         }
         

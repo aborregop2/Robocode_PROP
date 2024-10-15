@@ -8,7 +8,6 @@ import robocode.ScannedRobotEvent;
 
 public class Estat2 extends Estat{
     
-    private final double RADAR_TURN_ANGLE = 5;
    
 
     public Estat2(TimidinRobot rob) {
@@ -17,7 +16,6 @@ public class Estat2 extends Estat{
     
     @Override
     public void run() {
-        //robot.setTurnRadarRight(RADAR_TURN_ANGLE); 
         
 
         robot.execute(); 
@@ -27,9 +25,6 @@ public class Estat2 extends Estat{
     public void onScannedRobot(ScannedRobotEvent event) {
         double distance = event.getDistance();
         double firePower = Math.min(300 / distance, 3);
-        
-        double bearing = event.getBearing();
-        robot.setTurnRadarRight(normalizeAngle(bearing - robot.getRadarHeading()));
         
         robot.fire(firePower);
 

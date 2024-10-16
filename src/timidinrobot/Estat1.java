@@ -9,14 +9,12 @@ public class Estat1 extends Estat {
 
     private final double[] targetCoordinates;
     private static final double SAFE_DISTANCE = 120;
-    private boolean robotDetected = false;
     private boolean robotHit = false;
     private boolean hitWall = false;
     private double wallAngle;
     private double robotAngle;
     private double radarAngle;
-    private boolean radarDirectionRight = true;
-    private boolean startRadarTurning = true;
+
     
     public Estat1(TimidinRobot rob, double corner[]) {
         super(rob);
@@ -26,10 +24,7 @@ public class Estat1 extends Estat {
     @Override
     public void run() {
 
-        if (robotDetected) {     
-            robotDetected = false;
-        } 
-        
+
         if (robotHit) {
             robot.back(100);
             if (robotAngle < 0) {
@@ -57,9 +52,7 @@ public class Estat1 extends Estat {
         }
         
         
-        if (!robotDetected && !robotHit && !hitWall) {
-            
-           
+        if (!robotHit && !hitWall) {   
             double deltaX = targetCoordinates[0] - robot.getX();
             double deltaY = targetCoordinates[1] - robot.getY();
         
@@ -93,21 +86,18 @@ public class Estat1 extends Estat {
                 robot.setTurnLeft(90);
             }
         }
-        robot.execute(); 
     }
     
     @Override
     public void onHitRobot(HitRobotEvent event) {
         robotAngle = event.getBearing();
         robotHit = true;
-        robot.execute(); 
     }
 
     @Override
     public void onHitWall(HitWallEvent event) {
         wallAngle = event.getBearing();
         hitWall = true;
-        robot.execute(); 
     }
 
     private double normalizeAngle(double angle) {

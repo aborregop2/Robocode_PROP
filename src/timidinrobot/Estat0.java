@@ -30,7 +30,8 @@ public class Estat0 extends Estat {
         double[][] corners = getBattleFieldCorners();
         
         int farthestCornerIndex = findFarthestCornerIndex(targetCoordinates, corners);
-        robot.e = new Estat1(robot, corners[farthestCornerIndex]); 
+        robot.setEstat(new Estat1(robot, corners[farthestCornerIndex]));
+        
     }
 
     private double[] calculateTargetCoordinates(double angle, double distance) {

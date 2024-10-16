@@ -9,7 +9,7 @@ import robocode.ScannedRobotEvent;
 
 public class TimidinRobot extends AdvancedRobot {
 
-    public Estat e;
+    private Estat e;
     
     @Override
     public void run() {
@@ -17,7 +17,7 @@ public class TimidinRobot extends AdvancedRobot {
         setAdjustRadarForRobotTurn(false);
         setAdjustRadarForGunTurn(false);
         
-        e = new Estat0(this);
+        setEstat(new Estat0(this));
         
         while(true){
             e.run();
@@ -43,6 +43,10 @@ public class TimidinRobot extends AdvancedRobot {
     @Override
     public void onBulletHit(BulletHitEvent event) {
         e.onBulletHit(event);
+    }
+    
+    public void setEstat(Estat es){
+        e = es;
     }
 
 }

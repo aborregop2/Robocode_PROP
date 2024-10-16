@@ -7,7 +7,7 @@ import robocode.ScannedRobotEvent;
 
 public class Estat2 extends Estat {
     
-    private boolean enemyDead = true;
+    private boolean canTurn = true;
 
     public Estat2(TimidinRobot rob) {
         super(rob);
@@ -15,12 +15,20 @@ public class Estat2 extends Estat {
 
     @Override
     public void run() {
-        if (enemyDead) robot.turnGunLeft(30);
+        if (canTurn){
+            robot.turnGunLeft(30);
+        }
+        else{
+            robot.turnRadarLeft(1);
+            robot.turnRadarRight(1);
+
+        }
         robot.execute();
     }
 
     @Override
     public void onScannedRobot(ScannedRobotEvent event) {
+        canTurn = false;
         double angleToEnemy = robot.getHeading() - robot.getGunHeading() + event.getBearing();
         robot.setTurnGunRight(normalizeAngle(angleToEnemy)); 
         
@@ -38,10 +46,7 @@ public class Estat2 extends Estat {
     @Override
     public void onBulletHit(BulletHitEvent event) {
         if (event.getEnergy() <= 0) {
-            enemyDead = true;
-        }
-        else {
-            enemyDead = false;
+            canTurn = true;
         }
     }
 

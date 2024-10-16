@@ -15,6 +15,7 @@ public class Estat1 extends Estat {
     private double wallAngle;
     private double robotAngle;
     private double radarAngle;
+    private boolean radarDirectionRight = true;
     
     public Estat1(TimidinRobot rob, double corner[]) {
         super(rob);
@@ -24,25 +25,24 @@ public class Estat1 extends Estat {
     @Override
     public void run() {
         
-        if (robotDetected) {
-            
+        if (robotDetected) {     
             robotDetected = false;
         } 
         
         if (robotHit) {
-            robot.back(100);
+            robot.back(30);
             if (robotAngle < 0) {
                 robot.turnRight(90);
             }
             else {
                 robot.turnLeft(90);
             }
-            robot.ahead(40);
+            robot.ahead(30);
             robotHit = false;
         }
         
         if (hitWall) {
-            robot.back(100); 
+            robot.back(30); 
             if (wallAngle < 0) {
                 robot.turnRight(90);
             }
@@ -50,13 +50,15 @@ public class Estat1 extends Estat {
                 robot.turnLeft(90);
             }
             
-            robot.ahead(40);
+            robot.ahead(30);
 
             hitWall = false;
         }
         
         
         if (!robotDetected && !robotHit && !hitWall) {
+            
+           
             double deltaX = targetCoordinates[0] - robot.getX();
             double deltaY = targetCoordinates[1] - robot.getY();
         
@@ -65,11 +67,12 @@ public class Estat1 extends Estat {
             robot.turnRight(normalizeAngle(targetAngle - robot.getHeading()));
             robot.turnRadarRight(normalizeAngle(targetAngle - robot.getRadarHeading()));
             
+            
             robot.ahead(Math.hypot(deltaX, deltaY) - 60);
             
-            if (Math.hypot(deltaX, deltaY) <= 60){
-                robot.e = new Estat2(robot);
-            }
+            if (Math.hypot(deltaX, deltaY) <= 60){    
+                robot.setEstat(new Estat2(robot));
+            }   
             
         }
         
@@ -88,7 +91,6 @@ public class Estat1 extends Estat {
             else {
                 robot.turnLeft(90);
             }
-            robot.ahead(30);
         }
     }
     

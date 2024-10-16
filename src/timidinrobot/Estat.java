@@ -1,6 +1,7 @@
 
 package timidinrobot;
 
+import robocode.BulletHitEvent;
 import robocode.HitRobotEvent;
 import robocode.HitWallEvent;
 import robocode.ScannedRobotEvent;
@@ -17,5 +18,6 @@ public abstract class Estat{
     abstract void run();
     abstract void onScannedRobot(ScannedRobotEvent event);
     abstract void onHitRobot(HitRobotEvent event);
-    abstract public void onHitWall(HitWallEvent event);
+    abstract void onHitWall(HitWallEvent event);
+    abstract void onBulletHit(BulletHitEvent event);
 }

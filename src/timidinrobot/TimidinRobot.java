@@ -2,6 +2,7 @@
 package timidinrobot;
 
 import robocode.AdvancedRobot;
+import robocode.BulletHitEvent;
 import robocode.HitRobotEvent;
 import robocode.HitWallEvent;
 import robocode.ScannedRobotEvent;
@@ -38,4 +39,10 @@ public class TimidinRobot extends AdvancedRobot {
     public void onHitWall(HitWallEvent event) {
         e.onHitWall(event);
     }
+    
+    @Override
+    public void onBulletHit(BulletHitEvent event) {
+        e.onBulletHit(event);
+    }
+
 }

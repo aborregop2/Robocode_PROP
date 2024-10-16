@@ -16,6 +16,7 @@ public class Estat1 extends Estat {
     private double robotAngle;
     private double radarAngle;
     private boolean radarDirectionRight = true;
+    private boolean startRadarTurning = true;
     
     public Estat1(TimidinRobot rob, double corner[]) {
         super(rob);
@@ -24,30 +25,30 @@ public class Estat1 extends Estat {
 
     @Override
     public void run() {
-        
+
         if (robotDetected) {     
             robotDetected = false;
         } 
         
         if (robotHit) {
-            robot.back(30);
+            robot.back(100);
             if (robotAngle < 0) {
-                robot.turnRight(90);
+                robot.setTurnRight(90);
             }
             else {
-                robot.turnLeft(90);
+                robot.setTurnLeft(90);
             }
-            robot.ahead(30);
+            robot.ahead(100);
             robotHit = false;
         }
         
         if (hitWall) {
-            robot.back(30); 
+            robot.back(100); 
             if (wallAngle < 0) {
-                robot.turnRight(90);
+                robot.setTurnRight(90);
             }
             else {
-                robot.turnLeft(90);
+                robot.setTurnLeft(90);
             }
             
             robot.ahead(30);
@@ -64,13 +65,13 @@ public class Estat1 extends Estat {
         
             double angleToTarget = Math.atan2(deltaX, deltaY);
             double targetAngle = Math.toDegrees(angleToTarget);
-            robot.turnRight(normalizeAngle(targetAngle - robot.getHeading()));
-            robot.turnRadarRight(normalizeAngle(targetAngle - robot.getRadarHeading()));
+            robot.setTurnRight(normalizeAngle(targetAngle - robot.getHeading()));
+            robot.setTurnRadarRight(normalizeAngle(targetAngle - robot.getRadarHeading()));
             
             
-            robot.ahead(Math.hypot(deltaX, deltaY) - 60);
-            
-            if (Math.hypot(deltaX, deltaY) <= 60){    
+            robot.setAhead(Math.hypot(deltaX, deltaY) - 60);
+                 
+            if (Math.hypot(deltaX, deltaY) <= 60){  
                 robot.setEstat(new Estat2(robot));
             }   
             
@@ -86,30 +87,34 @@ public class Estat1 extends Estat {
         if (event.getDistance() <= SAFE_DISTANCE) {
             robot.fire(1);
             if (radarAngle < 0) {
-                robot.turnRight(90);
+                robot.setTurnRight(90);
             }
             else {
-                robot.turnLeft(90);
+                robot.setTurnLeft(90);
             }
         }
+        robot.execute(); 
     }
     
     @Override
     public void onHitRobot(HitRobotEvent event) {
         robotAngle = event.getBearing();
         robotHit = true;
+        robot.execute(); 
     }
 
     @Override
     public void onHitWall(HitWallEvent event) {
         wallAngle = event.getBearing();
         hitWall = true;
+        robot.execute(); 
     }
 
     private double normalizeAngle(double angle) {
         while (angle > 180) angle -= 360;
         while (angle < -180) angle += 360;
         return angle;
+        
     }
     
     @Override

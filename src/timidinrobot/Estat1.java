@@ -53,6 +53,7 @@ public class Estat1 extends Estat {
         
         
         if (!robotHit && !hitWall) {   
+
             double deltaX = targetCoordinates[0] - robot.getX();
             double deltaY = targetCoordinates[1] - robot.getY();
         

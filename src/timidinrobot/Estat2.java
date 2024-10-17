@@ -31,8 +31,8 @@ public class Estat2 extends Estat {
         canTurn = false;
         double angleToEnemy = robot.getHeading() - robot.getGunHeading() + event.getBearing();
         robot.setTurnGunRight(normalizeAngle(angleToEnemy)); 
-        
-        robot.setFire(1);  
+        double firePower = Math.min(3, 400 / event.getDistance());
+        robot.setFire(firePower);  
 
         robot.execute();
     }
